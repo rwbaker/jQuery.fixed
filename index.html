@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Fixed Div on Scroll</title>
+
+	<style type="text/css">
+	/* Spacing */
+		body				{margin:20px;}
+		hr					{margin:10px 0;}
+		#top				{height:300px; margin-bottom:20px;}
+		#container			{min-width:600px;}
+	/* Boxes */
+		.content			{border:1px solid #ccc; background:#eee;}
+		#sidebar-inner		{border:1px solid #aaa; background:#ccc;}
+		.content, 
+		#sidebar-inner		{padding:10px;}
+	/* Grid & Spacing */
+		#wrapper			{float:left; width:100%;}
+			#wrapper-inner	{margin-right: 320px;}
+		#wrapper .content	{min-height:200px; }
+		#sidebar			{float:right; width:300px; margin-left:-320px; position:relative;}
+			#sidebar-inner	{min-height:500px;}
+	/* Sidebar positioning */
+/*		.absolute			{position:absolute; width:280px;}
+		.fixed				{position:fixed; width:280px; top:20px;}
+		*/
+		#sidebar-inner		{width:280px;}
+	</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="js/jquery.fixed.js"></script>
+	<script>
+		$(document).ready(function(){
+		
+			$('#sidebar-inner').fixed({
+				'top'	: '20'
+			});
+				
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="top" class="content">
+
+		</div>
+
+		<div id="wrapper">
+			<div id="wrapper-inner">
+				<div class="content">
+					.content
+				</div>
+
+				<hr>
+
+				<div class="content">
+					.content
+				</div>
+				
+				<hr>
+
+				<div class="content">
+					.content
+				</div>
+				
+				<hr>
+
+				<div class="content">
+					.content
+				</div>
+
+				<hr>
+
+				<div class="content">
+					.content
+				</div>
+				
+				<hr>
+
+				<div class="content">
+					.content
+				</div>
+
+			</div>
+		</div>
+
+		<div id="sidebar">
+			<div id="sidebar-inner">
+				.sidebar
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
