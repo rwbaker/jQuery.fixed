@@ -1,5 +1,5 @@
 /*
-* jQuery Fixed Div plugin v1.0.0 <http://code.google.com/p/jquery-formdesigner-plugin/> 
+* jQuery Fixed Div plugin v1.0.0 <https://github.com/rwbaker/jQuery.fixed/> 
 * @requires jQuery v1.2.6 or later 
 * is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
 */
