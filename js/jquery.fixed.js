@@ -7,7 +7,8 @@
 (function( $ ){
 
     var default_options = {
-        'top': 0
+        top: 0,
+        absolutePosition: {top: 0}
     };
 
     $.fn.fixed = function( options ) {
@@ -15,34 +16,36 @@
 
         return this.each(function() {
             // Set the basics
-            var $this = $(this);
-            var offset = $this.offset();
-
-            offset = (parseInt(offset.top) - parseInt(o.top) );
+            var $this = $(this),
+                offset = $this.offset(),
+                topOffset = (parseInt(offset.top) - parseInt(o.top) );
 
             // Init
-            $this.css('position','absolute');
+            $this.css('position', 'absolute');
 
             // Check if element is already passed offset; usually on page refresh
-            if ( $(document).scrollTop() > offset ) {
+            if ( $(document).scrollTop() > topOffset ) {
                 setFixed();
             }
 
             window.onscroll = function() {
                 //documentElement.scrollTo works for IE/Firefox (Gecko); self.pageYOffset for Chrome/Safari(Webkit))
-                if (document.documentElement.scrollTop > offset || self.pageYOffset > offset) {
+                if (document.documentElement.scrollTop > topOffset || self.pageYOffset > topOffset) {
                     setFixed();
-
-                } else if (document.documentElement.scrollTop < offset || self.pageYOffset < offset) {
+                } else if (document.documentElement.scrollTop < topOffset || self.pageYOffset < topOffset) {
                     setAb();
                 }
             };
 
             function setFixed() {
-                $this.css('position','fixed').css('top', o.top+'px');
+                $this
+                    .css('position', 'fixed')
+                    .css({top: o.top, left: offset.left});
             }
             function setAb() {
-                $this.css('position','absolute').css('top', '0px');
+                $this
+                    .css('position', 'absolute')
+                    .css(o.absolutePosition);
             }
         });
 
