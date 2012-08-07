@@ -4,14 +4,13 @@
  * is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
  */
 
-(function( $ ){
-
+(function($){
     var default_options = {
         top: 0,
         absolutePosition: {top: 0}
     };
 
-    $.fn.fixed = function( options ) {
+    $.fn.fixed = function(options) {
         var o = $.extend({}, default_options, options);
 
         return this.each(function() {
@@ -24,7 +23,7 @@
             $this.css('position', 'absolute');
 
             // Check if element is already passed offset; usually on page refresh
-            if ( $(document).scrollTop() > topOffset ) {
+            if ($(document).scrollTop() > topOffset) {
                 setFixed();
             }
 
@@ -48,6 +47,5 @@
                     .css(o.absolutePosition);
             }
         });
-
     };
 })( jQuery );
