@@ -7,7 +7,7 @@
 (function($){
     var default_options = {
         top: 0,
-        absolutePosition: {top: 0}
+        absolutePosition: {top: 0, left: 0}
     };
 
     $.fn.fixed = function(options) {
