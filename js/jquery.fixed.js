@@ -1,56 +1,51 @@
 /*
-* jQuery Fixed Div plugin v1.0.0 <https://github.com/rwbaker/jQuery.fixed/> 
-* @requires jQuery v1.2.6 or later 
-* is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
-*/
+ * jQuery Fixed Div plugin v1.0.0 <https://github.com/rwbaker/jQuery.fixed/>
+ * @requires jQuery v1.2.6 or later
+ * is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+ */
 
-(function( $ ){
+(function($){
+    var default_options = {
+        top: 0,
+        absolutePosition: {top: 0, left: 0}
+    };
 
-	$.fn.fixed = function( options ) {  
-	
-		var settings = {
-			'top'	: 0
-		};
-		
-		return this.each(function() {        
-			// If options exist, lets merge them with our default settings
-			if ( options ) { 
-				$.extend( settings, options );
-			}
-		
-			// Set the basics
-			var $this = $(this);
-			var offset = $this.offset();
-			var offset = (parseInt(offset.top) - parseInt(settings.top) );
-			
-			// Init
-			$this.css('position','absolute');
-			
-			// Check if element is already passed offset; usually on page refresh
-			if ( $(document).scrollTop() > offset ) {
-				setFixed();	
-			};
-			
-			window.onscroll = function() {
-				//documentElement.scrollTo works for IE/Firefox (Gecko); self.pageYOffset for Chrome/Safari(Webkit))
-				if (document.documentElement.scrollTop > offset || self.pageYOffset > offset) {
-				   setFixed();
+    $.fn.fixed = function(options) {
+        var o = $.extend({}, default_options, options);
 
-				} else if (document.documentElement.scrollTop < offset || self.pageYOffset < offset) {
-				   setAb();
+        return this.each(function() {
+            // Set the basics
+            var $this = $(this),
+                offset = $this.offset(),
+                topOffset = (parseInt(offset.top) - parseInt(o.top) );
 
-				};
-			};
-			
-			function setFixed() {
-				$this.css('position','fixed').css('top', settings.top+'px');
-			};
-			
-			function setAb() {
-				$this.css('position','absolute').css('top', '0px');
-			};
-		
-		});
-	
-	};
+            // Init
+            $this.css('position', 'absolute');
+
+            // Check if element is already passed offset; usually on page refresh
+            if ($(document).scrollTop() > topOffset) {
+                setFixed();
+            }
+
+            window.onscroll = function() {
+                //documentElement.scrollTo works for IE/Firefox (Gecko); self.pageYOffset for Chrome/Safari(Webkit))
+                if (document.documentElement.scrollTop > topOffset || self.pageYOffset > topOffset) {
+                    setFixed();
+                } else if (document.documentElement.scrollTop < topOffset || self.pageYOffset < topOffset) {
+                    setAb();
+                }
+            };
+
+            function setFixed() {
+                $this
+                    .css('position', 'fixed')
+                    .css({top: o.top, left: offset.left});
+            }
+            function setAb() {
+                $this
+                    .css('position', 'absolute')
+                    .css(o.absolutePosition);
+            }
+        });
+    };
 })( jQuery );
